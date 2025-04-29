@@ -17,23 +17,23 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse<FastifyReply>();
     const request = ctx.getRequest<FastifyRequest>();
     const status =
-        exception instanceof HttpException
-            ? exception.getStatus()
-            : HttpStatus.INTERNAL_SERVER_ERROR;
+      exception instanceof HttpException
+        ? exception.getStatus()
+        : HttpStatus.INTERNAL_SERVER_ERROR;
 
     const message =
-        exception instanceof HttpException
-            ? exception.getResponse()
-            : { message: (exception as Error).message };
+      exception instanceof HttpException
+        ? exception.getResponse()
+        : { message: (exception as Error).message };
     // Log based on status code
     if (status >= 400 && status < 500) {
       this.logger.warn(
-          `HTTP ${status} Warning: ${JSON.stringify(message)} - Path: ${request.url}`,
+        `HTTP ${status} Warning: ${JSON.stringify(message)} - Path: ${request.url}`,
       );
     } else if (status >= 500) {
       this.logger.error(
-          `HTTP ${status} Error: ${JSON.stringify(message)} - Path: ${request.url}`,
-          exception instanceof Error ? exception.stack : undefined,
+        `HTTP ${status} Error: ${JSON.stringify(message)} - Path: ${request.url}`,
+        exception instanceof Error ? exception.stack : undefined,
       );
     }
 

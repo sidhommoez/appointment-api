@@ -11,7 +11,7 @@ import { showStartupMessage } from './utils/start-message';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { ConfigService } from '@nestjs/config';
-import {ValidationPipe} from "@nestjs/common";
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -24,11 +24,11 @@ async function bootstrap() {
   const port = configService.get('port');
 
   app.useGlobalPipes(
-      new ValidationPipe({
-        whitelist: true, // strips properties that do not have decorators
-        forbidNonWhitelisted: true, // throws an error if non-decorated properties are present
-        transform: true, // automatically transforms payloads to DTO instances
-      }),
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+    }),
   );
   app.enableCors({
     credentials: true,
@@ -39,7 +39,6 @@ async function bootstrap() {
     .setTitle('Appointment API')
     .setDescription(pjson.version)
     .setVersion(pjson.version)
-    .addBasicAuth()
     .build();
   const doc = SwaggerModule.createDocument(app, config);
 

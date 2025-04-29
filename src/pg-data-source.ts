@@ -1,4 +1,5 @@
-import { DataSource, DataSourceOptions } from 'typeorm';
+import type { DataSourceOptions } from 'typeorm';
+import { DataSource } from 'typeorm';
 import { join } from 'path';
 import 'dotenv/config';
 import * as dotenv from 'dotenv';

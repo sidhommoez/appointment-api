@@ -1,4 +1,4 @@
-import { HealthCheckResult, HealthCheckService } from '@nestjs/terminus';
+import type { HealthCheckResult, HealthCheckService } from '@nestjs/terminus';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { HealthController } from './health.controller';

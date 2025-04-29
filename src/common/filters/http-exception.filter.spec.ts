@@ -1,7 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { HttpExceptionFilter } from './http-exception.filter';
-import { ArgumentsHost, HttpException, HttpStatus } from '@nestjs/common';
-import { FastifyReply, FastifyRequest } from 'fastify';
+import type { ArgumentsHost } from '@nestjs/common';
+import { HttpException, HttpStatus } from '@nestjs/common';
+import type { FastifyReply, FastifyRequest } from 'fastify';
 
 describe('HttpExceptionFilter', () => {
   let filter: HttpExceptionFilter;

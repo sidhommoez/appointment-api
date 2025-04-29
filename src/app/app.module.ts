@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { configuration } from '../configuration';
+import configuration from '../configuration';
 import { HealthModule } from '../common/health/health.module';
 import pgDataSource from '../pg-data-source';
-import {ProvidersModule} from "../features/provider/providers.module";
-import {AppointmentModule} from "../features/appointment/appointment.module";
+import { ProvidersModule } from '../features/provider/providers.module';
+import { AppointmentModule } from '../features/appointment/appointment.module';
 
 @Module({
   imports: [
@@ -22,7 +22,7 @@ import {AppointmentModule} from "../features/appointment/appointment.module";
       },
     }),
     ProvidersModule,
-    AppointmentModule
+    AppointmentModule,
   ],
   controllers: [],
   providers: [],

@@ -1,0 +1,9 @@
+# run lint-staged
+npx lint-staged
+
+# run hadolint on Dockerfile
+if [ $(git diff --name-only --staged | grep docker/Dockerfile) ]
+then
+  echo "Checking Dockerfile with hadolint"
+  docker run --rm -i ghcr.io/hadolint/hadolint < docker/Dockerfile
+fi

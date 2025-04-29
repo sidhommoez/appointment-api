@@ -1,0 +1,5 @@
+{
+    "*.{ts,tsx,mts,js,jsx,mjs}": [
+        "npx eslint --fix"
+    ]
+}

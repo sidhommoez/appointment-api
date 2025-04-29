@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Provider } from './entities/provider.entity';
 import { Repository } from 'typeorm';
@@ -13,9 +13,10 @@ import { ErrorHelper } from '../../common/helpers/error.helper';
 @Injectable()
 export class ProvidersService {
   constructor(
+    @Inject(forwardRef(() => AppointmentsService))
+    private readonly appointmentsService: AppointmentsService,
     @InjectRepository(Provider)
     private readonly providerRepository: Repository<Provider>,
-    private readonly appointmentsService: AppointmentsService,
   ) {}
 
   async upsertSchedule(

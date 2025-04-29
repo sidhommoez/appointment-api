@@ -15,11 +15,11 @@ import { ProvidersService } from '../provider/providers.service';
 @Injectable()
 export class AppointmentsService {
   constructor(
+    @Inject(forwardRef(() => ProvidersService))
+    private readonly providersService: ProvidersService,
     @InjectRepository(Appointment)
     private readonly appointmentRepository: Repository<Appointment>,
     private readonly connection: DataSource,
-    @Inject(forwardRef(() => ProvidersService))
-    private readonly providersService: ProvidersService,
   ) {}
 
   async createAppointment(
@@ -127,6 +127,8 @@ export class AppointmentsService {
       where: { id: appointmentId, status: 'CONFIRMED' },
       relations: ['provider'],
     });
+
+    console.log(appointment);
 
     if (!appointment) {
       ErrorHelper.throwNotFound('Appointment not found or not confirmed');

@@ -1,24 +1,9 @@
-import {
-  Controller,
-  Post,
-  Body,
-  Put,
-  Param,
-  Delete,
-  Headers,
-} from '@nestjs/common';
+import { Controller, Post, Body, Put, Param, Delete } from '@nestjs/common';
 import { CreateAppointmentDto } from './dto/create-appointment.dto';
 import { UpdateAppointmentDto } from './dto/update-appointment.dto';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiParam,
-  ApiResponse,
-  ApiHeader,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { AppointmentsService } from './appointment.service';
 import { AppointmentIdParamDto } from './dto/appointment-id-param.dto';
-import { TimezoneHeaderDto } from './dto/timezone-header.dto';
 
 @ApiTags('Appointments')
 @Controller('api/appointments')
@@ -27,30 +12,13 @@ export class AppointmentsController {
 
   @Post()
   @ApiOperation({ summary: 'Book an Appointment' })
-  @ApiHeader({
-    name: 'Timezone',
-    required: false,
-    description: 'Optional IANA timezone (e.g., America/New_York)',
-  })
   @ApiResponse({ status: 201, description: 'Appointment booked successfully.' })
-  async createAppointment(
-    @Body() createAppointmentDto: CreateAppointmentDto,
-    @Headers() headers: TimezoneHeaderDto,
-  ) {
-    const timezone = headers['timezone'];
-    return this.appointmentsService.createAppointment(
-      createAppointmentDto,
-      timezone,
-    );
+  async createAppointment(@Body() createAppointmentDto: CreateAppointmentDto) {
+    return this.appointmentsService.createAppointment(createAppointmentDto);
   }
 
   @Put(':appointmentId')
   @ApiOperation({ summary: 'Reschedule an Appointment' })
-  @ApiHeader({
-    name: 'Timezone',
-    required: false,
-    description: 'Optional IANA timezone (e.g., Asia/Tokyo)',
-  })
   @ApiParam({ name: 'appointmentId', required: true })
   @ApiResponse({
     status: 200,
@@ -59,13 +27,10 @@ export class AppointmentsController {
   async rescheduleAppointment(
     @Param('appointmentId') appointmentId: string,
     @Body() updateAppointmentDto: UpdateAppointmentDto,
-    @Headers() headers: TimezoneHeaderDto,
   ) {
-    const timezone = headers['timezone'];
     return this.appointmentsService.rescheduleAppointment(
       appointmentId,
       updateAppointmentDto,
-      timezone,
     );
   }
 

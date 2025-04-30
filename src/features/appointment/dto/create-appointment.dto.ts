@@ -6,6 +6,7 @@ import {
   ValidatorConstraintInterface,
   ValidationArguments,
   Validate,
+  IsUUID,
 } from 'class-validator';
 
 @ValidatorConstraint({ name: 'isFutureDate', async: false })
@@ -24,8 +25,11 @@ export class CreateAppointmentDto {
   @IsString()
   patientId: string;
 
-  @ApiProperty({ description: 'Provider ID', example: 'prov_doc_456' })
-  @IsString()
+  @ApiProperty({
+    description: 'Provider ID',
+    example: '65101976-df2f-416c-a478-c4fe890e364d',
+  })
+  @IsUUID()
   providerId: string;
 
   @ApiProperty({

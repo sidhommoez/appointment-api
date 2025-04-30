@@ -3,6 +3,7 @@
 This project is an appointment system built with NestJS, TypeORM, and TypeScript.  
 This backend service will manage the creation, modification, and cancellation of appointments, handle availability checks, maintain provider schedules, and ensure proper system operation.
 
+
 ## Table of Contents
 
 - [Architecture](#Architecture)
@@ -129,6 +130,8 @@ This backend service will manage the creation, modification, and cancellation of
     ```
 
 2. The application will be running at `http://localhost:3000`.
+
+3. swagger documentation is available at `http://localhost:3000/docs`.
 
 ## Scripts 
 

@@ -35,7 +35,6 @@ describe('AppointmentsService', () => {
       transaction: vi.fn(),
     } as unknown as DataSource;
 
-    // Pass the correct arguments to the AppointmentsService constructor
     service = new AppointmentsService(
       providersService,
       appointmentRepository,

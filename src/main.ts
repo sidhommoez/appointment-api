@@ -37,7 +37,9 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Appointment API')
-    .setDescription(pjson.version)
+    .setDescription(
+      `${pjson.version} - You need a UUID for a providerId. Generate one here: https://www.uuidgenerator.net/`,
+    )
     .setVersion(pjson.version)
     .build();
   const doc = SwaggerModule.createDocument(app, config);

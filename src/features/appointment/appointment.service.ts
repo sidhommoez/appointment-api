@@ -28,7 +28,7 @@ export class AppointmentsService {
   ) {
     const { providerId, patientId, startTime } = createDto;
 
-    // Convert client time (in given timezone) to UTC
+    // Converts client time (in given timezone) to UTC
     const clientStart = DateTime.fromISO(startTime, {
       zone: clientTimezone ?? process.env.TZ,
     });
@@ -127,8 +127,6 @@ export class AppointmentsService {
       where: { id: appointmentId, status: 'CONFIRMED' },
       relations: ['provider'],
     });
-
-    console.log(appointment);
 
     if (!appointment) {
       ErrorHelper.throwNotFound('Appointment not found or not confirmed');

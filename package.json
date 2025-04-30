@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "prepare": "husky || true",
-    "build": "nest build -b swc",
+    "build": "nest build -b tsc",
     "start": "nodemon dist/main",
     "dev": "nest start -w --env-file .env",
     "lint": "npx eslint .",
@@ -33,7 +33,6 @@
     "class-validator": "^0.14.1",
     "dotenv": "^16.5.0",
     "figlet": "^1.8.0",
-    "ioredis": "^5.6.0",
     "luxon": "^3.6.1",
     "pg": "^8.14.1",
     "reflect-metadata": "^0.2.2",

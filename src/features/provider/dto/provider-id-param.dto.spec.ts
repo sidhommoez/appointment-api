@@ -9,7 +9,7 @@ describe('ProviderIdParamDto', () => {
 
     const errors = await validate(dto);
 
-    expect(errors.length).toBe(0); // No validation errors
+    expect(errors.length).toBe(0);
   });
 
   it('should fail validation when providerId is not a valid UUID', async () => {

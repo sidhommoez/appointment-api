@@ -1,4 +1,12 @@
-import { Controller, Post, Get, Param, Body, Query } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Get,
+  Param,
+  Body,
+  Query,
+  Headers,
+} from '@nestjs/common';
 import { ProvidersService } from './providers.service';
 import { CreateScheduleDto } from './dto/create-schedule.dto';
 import {
@@ -7,9 +15,11 @@ import {
   ApiParam,
   ApiQuery,
   ApiResponse,
+  ApiHeader,
 } from '@nestjs/swagger';
 import { ProviderIdParamDto } from './dto/provider-id-param.dto';
 import { AvailabilityDateDto } from './dto/get-availability-date.dto';
+import { TimezoneHeaderDto } from '../appointment/dto/timezone-header.dto';
 
 @ApiTags('Providers')
 @Controller('api/providers')
@@ -46,15 +56,22 @@ export class ProvidersController {
     required: true,
     description: 'Date to check availability (YYYY-MM-DD)',
   })
+  @ApiHeader({
+    name: 'Timezone',
+    required: false,
+    description: 'Optional IANA timezone (e.g., Asia/Tokyo)',
+  })
   @ApiResponse({ status: 200, description: 'Available time slots returned.' })
   async checkAvailability(
     @Param() getAvailabilityParams: ProviderIdParamDto,
     @Query() getAvailabilityQueries: AvailabilityDateDto,
+    @Headers() headers: TimezoneHeaderDto,
   ) {
-    console.log(getAvailabilityParams);
+    const timezone = headers['timezone'];
     return this.providersService.getAvailability(
       getAvailabilityParams,
       getAvailabilityQueries,
+      timezone,
     );
   }
 }
